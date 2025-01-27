@@ -6,12 +6,12 @@ body {
   justify-content: center;
   height: 100vh;
   margin: 0;
+  background-color: #f0f0f0;
 }
 
-#threejs-frame {
-  width: 600px;
-  height: 600px;
+#ludoCanvas {
   border: 2px solid black;
+  margin-top: 20px;
 }
 
 #rollDice {
