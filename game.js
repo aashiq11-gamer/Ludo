@@ -9,15 +9,20 @@ const camera = new THREE.PerspectiveCamera(75, 800 / 800, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('ludoCanvas') });
 renderer.setSize(800, 800);
 
-camera.position.z = 5;
+camera.position.z = 10;
 
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const materialUser = new THREE.MeshBasicMaterial({ color: 0x0000ff });
-const materialBot = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const userCube = new THREE.Mesh(geometry, materialUser);
-const botCube = new THREE.Mesh(geometry, materialBot);
-scene.add(userCube);
-scene.add(botCube);
+const boardGeometry = new THREE.PlaneGeometry(10, 10);
+const boardMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+const board = new THREE.Mesh(boardGeometry, boardMaterial);
+scene.add(board);
+
+const tokenGeometry = new THREE.SphereGeometry(0.2, 32, 32);
+const userMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+const botMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+const userToken = new THREE.Mesh(tokenGeometry, userMaterial);
+const botToken = new THREE.Mesh(tokenGeometry, botMaterial);
+scene.add(userToken);
+scene.add(botToken);
 
 function animate() {
   requestAnimationFrame(animate);
@@ -27,10 +32,10 @@ animate();
 
 // Function to update player positions
 function updatePositions() {
-  userCube.position.x = (userPosition % 7) - 3;
-  userCube.position.y = Math.floor(userPosition / 7) - 3;
-  botCube.position.x = (botPosition % 7) - 3;
-  botCube.position.y = Math.floor(botPosition / 7) - 3;
+  userToken.position.x = (userPosition % 7) - 3.5;
+  userToken.position.y = Math.floor(userPosition / 7) - 3.5;
+  botToken.position.x = (botPosition % 7) - 3.5;
+  botToken.position.y = Math.floor(botPosition / 7) - 3.5;
 }
 
 // Roll Dice event
@@ -57,7 +62,7 @@ function botMove() {
   updatePositions();
 }
 
-// Ad redirection every 10 seconds
+// Ad redirection every 15 seconds
 setInterval(() => {
   window.open('https://example.com', '_blank');
-}, 10000);
+}, 15000);
