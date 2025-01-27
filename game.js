@@ -1,18 +1,17 @@
 let currentPlayer = 'User';
 let userPosition = 0;
 let botPosition = 0;
-const boardSize = 50;  // Adjust according to your board design
+const boardSize = 56;  // Standard Ludo board size
 
 // Set up Three.js scene
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, 600 / 600, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(600, 600);
-document.getElementById('threejs-frame').appendChild(renderer.domElement);
+const camera = new THREE.PerspectiveCamera(75, 800 / 800, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('ludoCanvas') });
+renderer.setSize(800, 800);
 
 camera.position.z = 5;
 
-const geometry = new THREE.BoxGeometry();
+const geometry = new THREE.BoxGeometry(1, 1, 1);
 const materialUser = new THREE.MeshBasicMaterial({ color: 0x0000ff });
 const materialBot = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const userCube = new THREE.Mesh(geometry, materialUser);
@@ -28,10 +27,10 @@ animate();
 
 // Function to update player positions
 function updatePositions() {
-  userCube.position.x = (userPosition % 10) - 5;
-  userCube.position.y = Math.floor(userPosition / 10) - 5;
-  botCube.position.x = (botPosition % 10) - 5;
-  botCube.position.y = Math.floor(botPosition / 10) - 5;
+  userCube.position.x = (userPosition % 7) - 3;
+  userCube.position.y = Math.floor(userPosition / 7) - 3;
+  botCube.position.x = (botPosition % 7) - 3;
+  botCube.position.y = Math.floor(botPosition / 7) - 3;
 }
 
 // Roll Dice event
